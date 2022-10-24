@@ -1,10 +1,34 @@
 #include <iostream>
 
+#include "debug.h"
+
 using namespace std;
 
-int main(){
+class teste : public debugable_class {
+   public:
+    teste(int a) : a(a) {}
 
-  cout << "Hello World\n";
+    void print() {
+        cout << a << endl;
+    }
 
-  return 0;
+   private:
+    int a;
+};
+
+int main() {
+    
+    Debug debug;
+
+    teste t(10);
+
+    int a = 10;
+
+    // addVarDebug(debug, &t);
+    debug.add(&t, "t");
+    debug.add(new debugable<int>(a), "a");
+
+    debug.breakPoint();
+
+    return 0;
 }
