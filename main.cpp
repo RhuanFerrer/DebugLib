@@ -25,9 +25,11 @@ int main() {
     teste t(10, 10);
 
     int a = 10;
+    int b = 10;
 
     debug.add(&t, "t");
     debug.add(new debugable<int>(&a), "a");
+    debug.add(new debugable<int>(&b), "b");
 
     for (int i = 0; i < 10; i++) {
         t.increment();

@@ -3,64 +3,99 @@
 
 #include <functional>
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 
+/**
+ * @brief A class that can be implemented to use him in the debug implementation.
+ */
 class debugable_class {
-   private:
-
    public:
+    /**
+     * @brief Abstract method to be implemented by the derived class.
+     */
     virtual void print() = 0;
 };
 
+/**
+ * @brief A class to convert a type to a debugable object.
+ */
 template <typename T>
 class debugable : public debugable_class {
    public:
-    
-    debugable(T* value) : t(value) {}
-    
+    /**
+     * @brief Construct a new debugable object
+     *
+     * @param The pointer to the object to be debugged
+     */
+    debugable(T* reference) : reference(reference) {}
+
+    /**
+     *  @brief Destroy the debugable object
+     */
     ~debugable() {}
-    
-    void print() {
-        std::cout <<  *t;
-    }
-    
-    std::string getName() {
-        return name;
-    }
+
+    /**
+     *  @brief Print the object to the console
+     */
+    void print() { std::cout << *reference; }
+
+    /**
+     *  @brief Get the object
+     *
+     *  @return The pointer to the object
+     */
+    std::string getName() { return name; }
 
    private:
+    /**
+     * @brief The name of the object
+     */
     std::string name;
-    T *t;
+
+    /**
+     * @brief  The pointer to the object
+     */
+    T* reference;
 };
 
-typedef struct debugable_struct{
+/**
+ * @brief Struct to store the debug information
+ */
+typedef struct debugable_struct {
     debugable_class* debugable;
     std::string name;
 } debugable_struct;
 
+/**
+ * @brief A class to debug the program
+ */
 class Debug {
    private:
     std::vector<debugable_struct> data;
+    std::stringstream ss;
 
    public:
-    Debug() {}
+    /**
+     * @brief Construct a new Debug object
+     */
+    Debug();
 
-    void add(debugable_class* ref, std::string name) {
-        name = name[0] == '&' ? name.substr(1, name.size() - 1) : name;
-        data.push_back({ref, name});
-    }
+    /**
+     * @brief add a new object object to the debug
+     * 
+     * @param name The name of the object
+     * @param debugable The object to be debugged
+     */
+    void add(debugable_class* ref, std::string name);
 
-    void breakPoint(bool split) {
-        for (auto d : data) {
-            std::cout << d.name << ": { ";
-            d.debugable->print();
-            std::cout << " }";
-            if(split) std::cout << std::endl;
-            else std::cout << "  |  ";
-        }
-        getchar();
-    }
+    /**
+     * @brief Print the debug information to the console
+     * 
+     * @param split Split the debug information in multiple lines
+     */
+    void breakPoint(bool split);
 };
 
 #endif
