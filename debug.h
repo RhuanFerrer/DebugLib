@@ -1,12 +1,12 @@
 #ifndef DEBUG_H
 #define DEBUG_H
 
-
 #include <functional>
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <vector>
+
 
 /**
  * @brief A class that can be implemented to use him in the debug implementation.
