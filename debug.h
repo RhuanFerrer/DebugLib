@@ -73,10 +73,11 @@ typedef struct debugable_struct {
  */
 class Debug {
    private:
-    std::vector<debugable_struct> data;
     std::stringstream ss;
+    static std::vector<debugable_struct> data;
 
    public:
+
     /**
      * @brief Construct a new Debug object
      */
@@ -88,14 +89,14 @@ class Debug {
      * @param name The name of the object
      * @param debugable The object to be debugged
      */
-    void add(debugable_class* ref, std::string name);
+    static void add(debugable_class* ref, std::string name);
 
     /**
      * @brief Print the debug information to the console
      * 
      * @param split Split the debug information in multiple lines
      */
-    void breakPoint(bool split);
+    static void breakPoint(bool split);
 };
 
 #endif
