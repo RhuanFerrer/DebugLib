@@ -7,7 +7,6 @@
 #include <string>
 #include <vector>
 
-
 /**
  * @brief A class that can be implemented to use him in the debug implementation.
  */
